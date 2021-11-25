@@ -31,10 +31,12 @@
     </S100FC:producer>
 	
 <S100FC:S100_FC_FeatureTypes>
-	<S100FC:S100_FC_FeatureType isAbstract='false'>
+	<S100FC:S100_FC_FeatureType isAbstract='true'>
 <!-- =Class -->
 <S100FC:name>OGCAPIRec</S100FC:name>
-<S100FC:definition>No definition set for OGCAPIRec</S100FC:definition>
+<S100FC:definition>OGC API Record template. From this generic template all the OGC API Records for each product specification can be constructed with zero or more extensions specific to their domain.
+
+Features have been mapped from the OGC API Records definitions to S-100 equivalent types and structures. </S100FC:definition>
 
 <!-- 
 --> <!-- Class Declaration -->
@@ -372,7 +374,7 @@
 <!-- C2 relationships -->
 <!-- C2 relationships -->
 <!-- C2 relationships -->
- <S100FC:featureUseType></S100FC:featureUseType>
+<S100FC:featureUseType>geographic</S100FC:featureUseType>
  <!-- __ C1 'Realisation' 'FeatureType'  '' 'OGCAPIRec' -->
 <!-- __ C1 'Generalization' 'FeatureType'  '' 'S111_OGCAPIRec' -->
 <!-- __ C1 'Generalization' 'FeatureType'  '' 'S102_OGCAPIRec' -->
@@ -395,10 +397,7 @@
 <!-- __ C1 'Realisation' 'FeatureType'  '' 'S100_DatasetDiscoveryMetadata' -->
 <!-- __ C1 'Realisation' 'FeatureType'  '' 'S100_DatasetDiscoveryMetadata' -->
 <!-- __ C1 'Realisation' 'FeatureType'  '' 'S100_DatasetDiscoveryMetadata' -->
- 
- 
- 
- 
+<S100FC:permittedPrimitives>noGeometry</S100FC:permittedPrimitives>
    </S100FC:S100_FC_FeatureType>
    </S100FC:S100_FC_FeatureTypes>
 </S100FC:S100_FC_FeatureCatalogue>

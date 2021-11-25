@@ -59,8 +59,10 @@
 
  
 <!-- C2 relationships -->
- <S100FC:featureUseType></S100FC:featureUseType>
+ <S100FC:featureUseType>geographic</S100FC:featureUseType>
  <!-- __ C1 'Generalization' 'FeatureType'  '' 'S102_OGCAPIRec' -->
+ 
+ <S100FC:permittedPrimitives>surface</S100FC:permittedPrimitives><!-- PP -->
  
  
  

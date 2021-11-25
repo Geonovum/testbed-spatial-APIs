@@ -34,7 +34,7 @@
 	<S100FC:S100_FC_FeatureType isAbstract='false'>
 <!-- =Class -->
 <S100FC:name>S57_OGCAPIRec</S100FC:name>
-<S100FC:definition>No definition set for S57_OGCAPIRec</S100FC:definition>
+<S100FC:definition>OGC API Record type for S-57 ENC data. This extension adds navigationalPurpose and compilationScale.</S100FC:definition>
 
 <!-- 
 --> <!-- Class Declaration -->
@@ -60,6 +60,16 @@
                 <S100FC:attribute ref='compilationScale'/>
             </S100FC:attributeBinding>
 <!-- Attribute Ends -->
+<!-- Attribute -->
+            <!-- Autogen  = namedPlaces , text -->
+            <S100FC:attributeBinding sequential="false">
+                <S100FC:multiplicity>
+                    <S100Base:lower>0</S100Base:lower>
+                    <S100Base:upper xsi:nil='true' infinite='true'/>
+                </S100FC:multiplicity>
+                <S100FC:attribute ref='namedPlaces'/>
+            </S100FC:attributeBinding>
+<!-- Attribute Ends -->
 <!-- Finished Attributes -->
 <!-- Information bindings -->
 <!-- C5 informationBindings relationships v3.3 -->
@@ -75,10 +85,12 @@
 <!-- C2 relationships -->
 <!-- C2 relationships -->
 <!-- C2 relationships -->
- <S100FC:featureUseType></S100FC:featureUseType>
+ <S100FC:featureUseType>geographic</S100FC:featureUseType>
  <!-- __ C1 'Generalization' 'FeatureType'  '' 'S57_OGCAPIRec' -->
 <!-- __ C1 'Realisation' 'FeatureType'  '' 'S57_OGCAPIRec' -->
 <!-- __ C1 'Realisation' 'FeatureType'  '' 'S57_OGCAPIRec' -->
+ 
+ <S100FC:permittedPrimitives>surface</S100FC:permittedPrimitives><!-- PP -->
  
  
  
