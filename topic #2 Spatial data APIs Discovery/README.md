@@ -19,7 +19,7 @@ Traditionally most HOs worldwide have produced data to serve the goal of primary
 Findability of marine geospatial data from these organisations remains bespoke and relatively under-standardised. Within the core market and user base for data individual use cases have been implemented for discoverability but interoperability is low between implementers in regions and little standardisation has been explored. 
 S-57 electronic chart data is distributed with a basic aggregation methodology, thus:
 
-![image](https://user-images.githubusercontent.com/3368156/144290302-fc877b69-438f-432c-99f1-b5d6078025f7.png =250x250)
+![image](https://user-images.githubusercontent.com/3368156/144290302-fc877b69-438f-432c-99f1-b5d6078025f7.png)
 
 Data is catalogued by a single file, CATALOG.031, encoded in ISO811 format (the same format used to encode charts themselves). The vast majority of such data is distributed to vessels for primary navigation under SOLAS and broader uses tend to be of individual feature layers, disaggregated and turned into various different formats with varying degrees of lossy transformations.
 
@@ -52,16 +52,16 @@ From this observation an approach for S-100 begins to emerge. If a single mappin
 
 ## Explanation of research project stages.
 The discrete steps taken were:
-* 1. The construction of a UML model using IHO encoding practices describing OGC API Records “content” and types.
-* 2.	Mapping of existing IHO metadata structures into the OGC API Records features generated. Bespoke extensions have been accommodated in the model for S-102 Dense Bathymetry, S-111 Surface currents and S-104 Water Levels.
-* 3.	Derivation of the model into component XML Feature Catalogue elements and realisation of abstract types and relationships within it. 
-* 4.	Use of feature catalogue to construct, programmatically, features representing each OGC API Record for a number of domains. The domains chosen were.
-* a.	Electronic Chart Data in S-57 format for US and the Netherlands
-* b.	Surface current datasets conforming to IHO S-111 from NOAA
-* 5.	Construction of test datasets conforming to the feature catalogue record structure and located in a cloud server in an open database schema
-* 6.	Aggregation of metadata records and exposure in OGC API Records form using pygeoapi for OGC API Records. This involves the construction of OGC API Records encodings in geojson encapsulated in tinydb catalogue entries. 
-* 7.	Testing using pygeoapi server, GIS and programmatically
-* 8.	Writing up results (this document)…
+1. The construction of a UML model using IHO encoding practices describing OGC API Records “content” and types.
+2.	Mapping of existing IHO metadata structures into the OGC API Records features generated. Bespoke extensions have been accommodated in the model for S-102 Dense Bathymetry, S-111 Surface currents and S-104 Water Levels.
+3.	Derivation of the model into component XML Feature Catalogue elements and realisation of abstract types and relationships within it. 
+4.	Use of feature catalogue to construct, programmatically, features representing each OGC API Record for a number of domains. The domains chosen were.
+*	Electronic Chart Data in S-57 format for US and the Netherlands
+* Surface current datasets conforming to IHO S-111 from NOAA
+5. Construction of test datasets conforming to the feature catalogue record structure and located in a cloud server in an open database schema
+6. Aggregation of metadata records and exposure in OGC API Records form using pygeoapi for OGC API Records. This involves the construction of OGC API Records encodings in geojson encapsulated in tinydb catalogue entries. 
+7.	Testing using pygeoapi server, GIS and programmatically
+8.	Writing up results (this document)…
 
 ## Other outputs
 In arriving at these results a number of “interesting” byproducts have been generated…
@@ -72,4 +72,10 @@ In arriving at these results a number of “interesting” byproducts have been 
 ## Model created for OGC API Records
 ![image](https://user-images.githubusercontent.com/3368156/144290230-c436eff0-f0b8-402c-8b66-89531cf30830.png)
 
+## Feature Catalogue for OGC API Records.
 
+blurb
+
+## Mapping from IHO Fields to OGC API Records
+
+![image](https://user-images.githubusercontent.com/3368156/144292136-f1b853e2-20f5-40fe-aaf3-a686c8f70cd3.png)
