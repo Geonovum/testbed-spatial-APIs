@@ -19,13 +19,13 @@ Traditionally most HOs worldwide have produced data to serve the goal of primary
 Findability of marine geospatial data from these organisations remains bespoke and relatively under-standardised. Within the core market and user base for data individual use cases have been implemented for discoverability but interoperability is low between implementers in regions and little standardisation has been explored. 
 S-57 electronic chart data is distributed with a basic aggregation methodology, thus:
 
-[IMG: S-57 Overview]
+![image](https://user-images.githubusercontent.com/3368156/144290302-fc877b69-438f-432c-99f1-b5d6078025f7.png)
 
 Data is catalogued by a single file, CATALOG.031, encoded in ISO811 format (the same format used to encode charts themselves). The vast majority of such data is distributed to vessels for primary navigation under SOLAS and broader uses tend to be of individual feature layers, disaggregated and turned into various different formats with varying degrees of lossy transformations.
 
 The concept of “service” as the sum total of all possible datasets also exists due to the IMO requirement for maintenance of a revision record on every vessel. Service metadata is defined by a single CSV file delivered with all distributed datasets, PRODUCTS. TXT
 
-[DIAG: S-57 parts]
+![image](https://user-images.githubusercontent.com/3368156/144290330-a111b50b-9a26-41f7-96e7-63b9d18f9133.png)
 
 Ultimately, therefore there are a number of sources of individual feature, dataset and service metadata within the standards. “Coverage” has a very specific meaning in all IHO standards. S-57 (and to some extent, S-100) define it as a 2-D polygon where data coverage exists and it is included in most datasets as a feature in its right (validation tests exclude features which lie outside coverage areas). In S-57, in order to create datasets with rectangular (angular rectangular) extents, coverage is extended with areas of “no data available” (this has been dispensed with in the newer S-101 ENC equivalent S-100 product specification. Indeed, it is this coverage, together with a dataset’s Compilation Scale, that form a high priority metadata item across services.
 Charts are updateable. One of the significant differences between S-57, S-100 and other vector formats is the rigorous incremental update method it encapsulates. This update method allows for incremental updating of features, attributes, and the topological structure of which its geometry is made. The model is one of simple Add/Delete and Modify instructions encoded as sequences of update instructions in discrete updates. This creates some metadata challenges though as a dataset’s “issue date” can be sometimes interpreted as the date of the major edition issue or the latest update. S-57 has evolved a dedicated process for describing the process, which has been (at least partly) inherited by S-101.
@@ -38,8 +38,8 @@ Metadata in the S-100 framework is described in a far more standardised form but
 S-100 has a dedicated part devoted to metadata (Part 4, currently undergoing substantial revision for S-100 edition 5.0.0, due for release in 2022). This Part essentially profiles the ISO19115 approach (like many other metadata framework) by establishing a core set of “fields” (i.e. data) which are (largely) drawn from datasets using the framework and then providing an encoding of said data fields alongside the datasets themselves. Like some other domains, S-100 also provides a mechanism for extending metadata models for individual product specifications.
 
 The UML model for the S-100 metadata model is shown in the diagram below
+![image](https://user-images.githubusercontent.com/3368156/144290277-e1c4cf14-7c10-445a-8b68-6c3de74f31cb.png)
 
-[DIAG: S100 Metadata]
 
 Traditionally metadata is defined as “metadata about data”. There are, essentially, two “data” models in S-100 then. The first is the S-100 General Feature model (GFM). This is how S-100 expresses “data” within its domain. Drawing heavily from ISO19100 and allied standards, the S-100 GFM provides a way of encoding marine phenomena in a structure defined within the framework’s parameters. These structures encode the entities, attributes and relationships from UML-based Application Schemas into  In practice, arbitrarily complex structures can be formulated to describe such phenomena, all instances of the S-100 GFM.
 The second “data” model is the metadata model, as defined in the previous section. This is also UML based but has a separate XML encoding drawn from the ISO model templates and using many of the ISO XML schemas.
@@ -52,16 +52,16 @@ From this observation an approach for S-100 begins to emerge. If a single mappin
 
 ## Explanation of research project stages.
 The discrete steps taken were:
-* 1. The construction of a UML model using IHO encoding practices describing OGC API Records “content” and types.
-* 2.	Mapping of existing IHO metadata structures into the OGC API Records features generated. Bespoke extensions have been accommodated in the model for S-102 Dense Bathymetry, S-111 Surface currents and S-104 Water Levels.
-* 3.	Derivation of the model into component XML Feature Catalogue elements and realisation of abstract types and relationships within it. 
-* 4.	Use of feature catalogue to construct, programmatically, features representing each OGC API Record for a number of domains. The domains chosen were.
-* a.	Electronic Chart Data in S-57 format for US and the Netherlands
-* b.	Surface current datasets conforming to IHO S-111 from NOAA
-* 5.	Construction of test datasets conforming to the feature catalogue record structure and located in a cloud server in an open database schema
-* 6.	Aggregation of metadata records and exposure in OGC API Records form using pygeoapi for OGC API Records. This involves the construction of OGC API Records encodings in geojson encapsulated in tinydb catalogue entries. 
-* 7.	Testing using pygeoapi server, GIS and programmatically
-* 8.	Writing up results (this document)…
+1. The construction of a UML model using IHO encoding practices describing OGC API Records “content” and types.
+2.	Mapping of existing IHO metadata structures into the OGC API Records features generated. Bespoke extensions have been accommodated in the model for S-102 Dense Bathymetry, S-111 Surface currents and S-104 Water Levels.
+3.	Derivation of the model into component XML Feature Catalogue elements and realisation of abstract types and relationships within it. 
+4.	Use of feature catalogue to construct, programmatically, features representing each OGC API Record for a number of domains. The domains chosen were.
+*	Electronic Chart Data in S-57 format for US and the Netherlands
+* Surface current datasets conforming to IHO S-111 from NOAA
+5. Construction of test datasets conforming to the feature catalogue record structure and located in a cloud server in an open database schema
+6. Aggregation of metadata records and exposure in OGC API Records form using pygeoapi for OGC API Records. This involves the construction of OGC API Records encodings in geojson encapsulated in tinydb catalogue entries. 
+7.	Testing using pygeoapi server, GIS and programmatically
+8.	Writing up results (this document)…
 
 ## Other outputs
 In arriving at these results a number of “interesting” byproducts have been generated…
@@ -70,6 +70,12 @@ In arriving at these results a number of “interesting” byproducts have been 
 3.	S-128 mappings have been produced which conform to the existing S-128 prodict specification. These use the S-128 feature model and translate to OAS conformant data structures which can be seamlessly embedded in OGC API.
 
 ## Model created for OGC API Records
+![image](https://user-images.githubusercontent.com/3368156/144290230-c436eff0-f0b8-402c-8b66-89531cf30830.png)
 
-[DIAG: Model]
+## Feature Catalogue for OGC API Records.
 
+blurb
+
+## Mapping from IHO Fields to OGC API Records
+
+![image](https://user-images.githubusercontent.com/3368156/144292136-f1b853e2-20f5-40fe-aaf3-a686c8f70cd3.png)
