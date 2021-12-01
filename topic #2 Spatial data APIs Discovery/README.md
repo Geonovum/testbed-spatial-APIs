@@ -19,7 +19,7 @@ Traditionally most HOs worldwide have produced data to serve the goal of primary
 Findability of marine geospatial data from these organisations remains bespoke and relatively under-standardised. Within the core market and user base for data individual use cases have been implemented for discoverability but interoperability is low between implementers in regions and little standardisation has been explored. 
 S-57 electronic chart data is distributed with a basic aggregation methodology, thus:
 
-![image](https://user-images.githubusercontent.com/3368156/144290302-fc877b69-438f-432c-99f1-b5d6078025f7.png)
+![image](https://user-images.githubusercontent.com/3368156/144290302-fc877b69-438f-432c-99f1-b5d6078025f7.png =250x250)
 
 Data is catalogued by a single file, CATALOG.031, encoded in ISO811 format (the same format used to encode charts themselves). The vast majority of such data is distributed to vessels for primary navigation under SOLAS and broader uses tend to be of individual feature layers, disaggregated and turned into various different formats with varying degrees of lossy transformations.
 
