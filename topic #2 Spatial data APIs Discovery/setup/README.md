@@ -21,5 +21,5 @@ From scratch the default pygeoapi setup instructions work well.
 This gets pygeoapi up and running.
 
 ## Configure to use our records.
-
+In the setup folder is a startup script start.sh and a charts-config.yml configuration for the pygeoapi server. This contains mappings to the individual tinydb catalogues created for the IHO datasets. NL ENC data harvesting and NOAA chart metadata for S-57 and S111 metadata are included.
 
