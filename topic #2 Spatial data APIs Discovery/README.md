@@ -1,4 +1,14 @@
 # Topic 2: Spatial data APIs Discovery
+## Contents
+* This document, main report of the topic 2 project
+* Model outputs (EA)
+* IHO Feature Catalogue
+* pygeoapi setup instructions and configuration files
+* tinyDB Catalogue
+* Miscellaneous data manipulation tools
+* Docs. PPT, other notes etc...
+
+
 ## Introduction 
 This folder contains working drafts, test data and results/reports of the topic 2. The aim of topic 2 is "...to make a collection of spatial data discoverable (i.e. FAIR Findable) on the web, using OGC API standards, and to report on how this can best be done..."
 
