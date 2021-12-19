@@ -53,6 +53,14 @@ S-100 has a dedicated part devoted to metadata (Part 4, currently undergoing sub
 The UML model for the S-100 metadata model is shown in the diagram below
 ![image](https://user-images.githubusercontent.com/3368156/144290277-e1c4cf14-7c10-445a-8b68-6c3de74f31cb.png)
 
+An example of dataset discovery metadata is
+```xml
+<DatasetDiscoveryMetadata>
+  <fileName></fileName>
+</DatasetDiscoveryMetadata>
+```
+S-100, as a framework standard, defines a number of product specifications, all of which have their own XML Feature Catalogue. 
+[TODO: Feature Catalogue and example]
 
 ## Our approach
 Traditionally metadata is defined as “metadata about data”. There are, essentially, two “data” models in S-100 then. The first is the S-100 General Feature model (GFM). This is how S-100 expresses “data” within its domain. Drawing heavily from ISO19100 and allied standards, the S-100 GFM provides a way of encoding marine phenomena in a structure defined within the framework’s parameters. These structures encode the entities, attributes and relationships from UML-based Application Schemas into  In practice, arbitrarily complex structures can be formulated to describe such phenomena, all instances of the S-100 GFM.
