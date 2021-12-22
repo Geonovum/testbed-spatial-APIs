@@ -1,12 +1,13 @@
 # Topic 2: Spatial data APIs Discovery
 ## Content
 This document contains the main report of the topic 2 project. It also doucments references to its outputs, namely.
-* Model and Application Schema documentation outputs (EA)
-* IHO Feature Catalogue construction and detail
-* pygeoapi setup instructions and configuration files
-* tinyDB Catalogue
-* Miscellaneous data manipulation tools
-* Docs. PPT, other notes etc...
+
+* Model and Application Schema documentation outputs (Enterprise Architect / MS Word)
+* IHO Feature Catalogue construction and detailed description (XML)
+* pygeoapi setup instructions and configuration files (JSON, YAML)
+* tinyDB Catalogue (geoJSON + scripts for their creation)
+* Miscellaneous data manipulation tools (miscellaneous formats, python and jar libraries)
+* Documents, presentations and other notes from the project including all public briefing presentations.
 
 
 ## Background 
