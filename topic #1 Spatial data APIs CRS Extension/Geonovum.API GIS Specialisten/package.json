@@ -1,0 +1,79 @@
+{
+    "name": "ogc-api-crs",
+    "version": "1.0.0",
+    "description": "Example implementation of a OGC compliant API with custom CRS support",
+    "author": "GIS Specialisten (gisspecialisten.nl)",
+    "private": true,
+    "license": "GPLv3",
+    "scripts": {
+        "local_env": "env-cmd -f .env.development",
+        "release_env": "env-cmd -f .env.release",
+        "start": "npm run local_env nest start",
+        "start:dev": "./node_modules/.bin/env-cmd -f .env.development nest start --watch",
+        "start:debug": "npm run local_env  nest start --debug --watch",
+        "start:prod": "npm run release_env node dist/main",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:cov": "jest --coverage",
+        "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+        "test:e2e": "jest --config ./test/jest-e2e.json",
+        "prebuild": "rimraf dist",
+        "build": "npm run local_env nest build",
+        "build_prod": "npm run release_env nest build",
+        "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+        "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    },
+    "dependencies": {
+        "@nestjs/common": "^8.0.11",
+        "@nestjs/core": "^8.0.11",
+        "@nestjs/platform-express": "^8.0.11",
+        "@nestjs/swagger": "^5.1.0",
+        "@nestjs/typeorm": "^8.0.2",
+        "pg": "^8.7.1",
+        "reflect-metadata": "^0.1.13",
+        "rimraf": "^3.0.2",
+        "rxjs": "^7.4.0",
+        "swagger-ui-express": "^4.1.6",
+        "typeorm": "^0.2.38"
+    },
+    "devDependencies": {
+        "@nestjs/cli": "^8.1.2",
+        "@nestjs/schematics": "^8.0.3",
+        "@nestjs/testing": "^8.0.11",
+        "@types/express": "^4.17.13",
+        "@types/jest": "^27.0.2",
+        "@types/node": "^16.10.3",
+        "@types/supertest": "^2.0.11",
+        "@typescript-eslint/eslint-plugin": "^4.25.0",
+        "@typescript-eslint/parser": "^4.25.0",
+        "env-cmd": "^10.1.0",
+        "eslint": "^7.27.0",
+        "eslint-config-prettier": "8.3.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "jest": "^27.2.5",
+        "prettier": "^2.1.2",
+        "supertest": "^6.1.6",
+        "ts-jest": "^27.0.5",
+        "ts-loader": "^9.2.6",
+        "ts-node": "^10.3.0",
+        "tsconfig-paths": "^3.11.0",
+        "typescript": "^4.4.3"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "src",
+        "testRegex": ".*\\.spec\\.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "collectCoverageFrom": [
+            "**/*.(t|j)s"
+        ],
+        "coverageDirectory": "../coverage",
+        "testEnvironment": "node"
+    }
+}
