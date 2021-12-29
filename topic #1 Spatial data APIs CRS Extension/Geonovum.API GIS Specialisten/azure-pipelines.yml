@@ -1,0 +1,37 @@
+trigger:
+- develop
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+  - job: build_prod
+    steps:
+    - task: replacetokens@3
+      displayName: 'Replace tokens in .env.release'
+      inputs:
+          targetFiles: '**/.env.release'
+
+    - script: |
+        rm package-lock.json
+      displayName: 'remove package lock'
+
+    - script: |
+        npm install
+      displayName: 'npm install'
+
+    - script: |
+        npm run build_prod
+      displayName: 'build prod'
+
+    - task: ArchiveFiles@2
+      displayName: 'Archive files'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: 'drop.zip'
+        replaceExistingArchive: true
+
+    - publish: drop.zip
+      artifact: drop

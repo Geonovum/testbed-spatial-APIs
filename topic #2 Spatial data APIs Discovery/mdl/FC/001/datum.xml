@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<S100FC:S100_FC_FeatureCatalogue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.iho.int/S100FC S100FC.xsd"
+    xmlns:S100FC="http://www.iho.int/S100FC" xmlns:S100Base="http://www.iho.int/S100Base"
+    xmlns:S100FD="http://www.iho.int/S100FD" xmlns:S100CI="http://www.iho.int/S100CI"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+	<!-- IIC FC Std header info -->
+	<!-- Version 1.8.2          -->
+	
+    <S100FC:name>S-101</S100FC:name>
+    <S100FC:scope>Ocean, Coastal, Ports and Harbors.</S100FC:scope>
+    <S100FC:fieldOfApplication>Marine Navigation</S100FC:fieldOfApplication>
+    <S100FC:versionNumber>1.0.0</S100FC:versionNumber>
+    <S100FC:versionDate>2019-04-09</S100FC:versionDate>    <S100FC:producer>
+        <S100CI:role>pointOfContact</S100CI:role>
+        <S100CI:party>
+            <S100CI:CI_Organisation>
+                <S100CI:name>International Hydrographic Organization</S100CI:name>
+                <S100CI:contactInfo>
+                    <S100CI:address>
+                        <S100CI:administrativeArea>4b quai Antonie 1er</S100CI:administrativeArea>
+                        <S100CI:country>Monaco</S100CI:country>
+                        <S100CI:electronicMailAddress>info@iho.int</S100CI:electronicMailAddress>
+                    </S100CI:address>
+                    <S100CI:onlineResource>
+                        <S100CI:linkage>www.iho.int</S100CI:linkage>
+                    </S100CI:onlineResource>
+                </S100CI:contactInfo>
+            </S100CI:CI_Organisation>
+        </S100CI:party>
+    </S100FC:producer>
+	
+<S100FC:S100_FC_ComplexAttributes>
+	<S100FC:S100_FC_ComplexAttribute>
+<!-- =Class -->
+<S100FC:name>datum</S100FC:name>
+<S100FC:definition>No definition set for datum</S100FC:definition>
+
+<!-- 
+--> <!-- Class Declaration -->
+<S100FC:code>datum</S100FC:code>
+<!-- Attributes -->
+<!-- Attribute -->
+            <!-- Autogen  = crs , text -->
+            <S100FC:subAttributeBinding sequential="false">
+                <S100FC:multiplicity>
+                    <S100Base:lower>0</S100Base:lower>
+                    <S100Base:upper xsi:nil='false' infinite='false'>1</S100Base:upper>
+                </S100FC:multiplicity>
+                <S100FC:attribute ref='crs'/>
+            </S100FC:subAttributeBinding>
+<!-- Attribute Ends -->
+<!-- Attribute -->
+            <!-- Autogen  = categoryOfDatum ,  -->
+            <S100FC:subAttributeBinding sequential="false">
+                <S100FC:multiplicity>
+                    <S100Base:lower>1</S100Base:lower>
+                    <S100Base:upper xsi:nil='false' infinite='false'>1</S100Base:upper>
+                </S100FC:multiplicity>
+                <S100FC:attribute ref='categoryOfDatum'/>
+            </S100FC:subAttributeBinding>
+<!-- Attribute Ends -->
+<!-- Finished Attributes -->
+<!-- Information bindings -->
+<!-- Inheritance relationships --> 
+   </S100FC:S100_FC_ComplexAttribute>
+   </S100FC:S100_FC_ComplexAttributes>
+</S100FC:S100_FC_FeatureCatalogue>
