@@ -158,6 +158,7 @@ S-100, as a framework standard, defines a number of product specifications, all 
 ## Our approach
 Traditionally metadata is defined as “metadata about data”. Keeping in mind the introduction section, there are, essentially, two “data” models in S-100 then. The first is the S-100 General Feature model (GFM). This is how S-100 expresses “data” within its domain. Drawing heavily from ISO19100 and allied standards, the S-100 GFM provides a way of encoding marine phenomena in a structure defined within the framework’s parameters. These structures encode the entities, attributes and relationships from UML-based Application Schemas into GFM "instances".
 
+
 In practice, arbitrarily complex structures can be formulated to describe such phenomena, all instances of the S-100 GFM and all conforming to the feature catalogue structure defined by the standard, for example a simple XML encoding of a feature encoded as :
 
 ![image](https://user-images.githubusercontent.com/3368156/147746641-31420660-b018-46e6-9309-e9fadc9c9569.png)
@@ -189,14 +190,17 @@ where a feature catalogue defines the feature names, attributes, types and multi
 
 The second “data” model is the metadata model, as defined in the previous section. This is also UML based but has a separate XML encoding drawn from the ISO model templates and using many of the ISO XML schemas.
 
+![image](https://user-images.githubusercontent.com/3368156/147747057-56e512be-bd58-43fd-b588-86642f1592c7.png)
+
+
 The challenge of the research, then, is twofold
 * To develop a way of representing IHO "data" content in a way which can be used in OGC API implementations
 * To appraise the S-100 (and S-57) metadata representations in an OGC API context.
 
 In order to approach these challenges realistically some examples have been drawn from the many IHO standards availablem namely:
 * IHO S-128 which is the only IHO product specification representing "metadata" of any kind. S-128 represents service metadata for a service provider with multiple different products included, data coverage and times/dates of release and update.
-* IHO S-57 (and S-101). The most ubiquitous of all IHO product specificaitons, S-57 is the standard for electronic charts and a mandated standard for Coastal states under the IMO SOLAS convention. 
-* IHO S-100 product specifications, S-111 and S-102 - these product specifications represent mature developed product specifications under the IHO's S-100 framework and have well-evolved metadata models within their defined standards.
+* IHO S-57 (and S-101). The most ubiquitous of all IHO product specificaitons, S-57 is the standard for electronic charts and a mandated standard for Coastal states under the IMO SOLAS convention (as described earlier)
+* IHO S-100 product specifications, S-111 and S-102 - these product specifications represent mature developed product specifications under the IHO's S-100 framework and have well-evolved metadata models within their defined standards. As S-100 is rolled out, data producers are likely to use the IHO product specification structure to create individual portfolios of data for promulgation rather than disaggregating their ENC data so a core focus is on how native S-100 products can be structured for OGC API Records.
 
 The “OGC API” family of standards has evolved from a long period of user consultation rationalising many of the perceived shortcomings of the (very) prescriptive WMS/WFS standards of the previous generation. OGC API provides an “essentially” content neutral model for defining (using OAS) “content” and webservices to access it. To date, no robust mapping from the S-100 GFM has been made to OGC API / OAS. Although not technically "difficult" the two models remain fairly distant from each other in a number of domains and a structured approach which can be reused for multiple IHO use cases is still challengin.
 
