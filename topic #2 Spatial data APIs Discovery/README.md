@@ -25,11 +25,28 @@ The main objectives of the research are:
 
 ## Problem Statement.
 IHO S-100 provides an overall methodology and set of component standards for modelling and encoding all types of marine phenomena. It is the culmentaiton of many years effort by the hydrographic community and is approaching edition 5.0.0, intended for live implementation on commercial vessel bridges satisfying international regulatory standards and for primary navigation of verssels.
+
 S-100 implements or profiles many of the ISO19100 series of standards, with the intention of increasing interoperability for the many international hydrographic offices needing to produce data serving broader purposes.
+
 Traditionally most HOs worldwide have produced data to serve the goal of primary navigation but many case studies have highlighted the immense value of marine geospatial data.
-Findability of marine geospatial data from these organisations remains bespoke and relatively under-standardised. Within the core market and user base for data individual use cases have been implemented for discoverability but interoperability is low between implementers in regions and little standardisation has been explored.
+
+Findability of marine geospatial data from these organisations remains bespoke and relatively under-standardised. Within the core market and user base for data individual use cases have been implemented for discoverability but interoperability is low between implementers in different regions and little standardisation has been explored from a technical perspective. 
+
+Much effort and activity has been focused on broader uses through the IHO's own MSDI working group (MSDIWG) but this has focused on building capacity rather than technical means of achieving interoperability. As a result, most IHO implementers have developed a broad range of solutions for MSDI deployment and data promulgation with a large disparity of standards, encodings and formats in use.
 
 ### S-57 data
+
+The primary output of most IHO data producers is the electronic navigational chart (ENC). An ENC is a vector based format, designed specifically for the purpose of narine navigation of large, SOLAS class vessels. It is the result of many years of standardisation globally and is a comprehensive standard encompassing 180 different feature classes and their respective attributes. S-57 has long been identified as a central cartographic asset with many broader uses other than navigation. Many data producers disaggregate the component features from the S-57 chart and form value added datasets in order to allow access to individual feature classes such as:
+* Bathymetric data, soundings and depth areas
+* Coastline, Shoreline Constructions and Land Areas
+* Wrecks, Obstructions and Hazards
+* Aids to Navigation
+* Maritime Limits and Boundaries
+
+The end result of many years of cooperation with organisations under the IMO, ENC is accepted for primary navigation of all vessels under the international SOLAS convention. Its content, therefore, carries a significant amount of liability for its member state producers.
+
+S-101, described in the next section is the replacement format for ENC currently entering the development stage by the IHO.
+
 S-57 electronic chart data is distributed with a basic aggregation methodology, thus:
 
 ![image](https://user-images.githubusercontent.com/3368156/144290302-fc877b69-438f-432c-99f1-b5d6078025f7.png)
@@ -41,8 +58,24 @@ The concept of “service” as the sum total of all possible datasets also exis
 ![image](https://user-images.githubusercontent.com/3368156/144290330-a111b50b-9a26-41f7-96e7-63b9d18f9133.png)
 
 Ultimately, therefore there are a number of sources of individual feature, dataset and service metadata within the standards. “Coverage” has a very specific meaning in all IHO standards. S-57 (and to some extent, S-100) define it as a 2-D polygon where data coverage exists and it is included in most datasets as a feature in its right (validation tests exclude features which lie outside coverage areas). In S-57, in order to create datasets with rectangular (angular rectangular) extents, coverage is extended with areas of “no data available” (this has been dispensed with in the newer S-101 ENC equivalent S-100 product specification. Indeed, it is this coverage, together with a dataset’s Compilation Scale, that form a high priority metadata item across services.
+
 Charts are updateable. One of the significant differences between S-57, S-100 and other vector formats is the rigorous incremental update method it encapsulates. 
+
 This update method allows for incremental updating of features, attributes, and the topological structure of which its geometry is made. The model is one of simple Add/Delete and Modify instructions encoded as sequences of update instructions in discrete updates. This creates some metadata challenges though as a dataset’s “issue date” can be sometimes interpreted as the date of the major edition issue or the latest update. S-57 has evolved a dedicated process for describing the process, which has been (at least partly) inherited by S-101.
+
+## The introduction of IHO S-100
+In response to the successes of IHO S-57 and its development the IHO commenced an ambitious development programme in 2003. What was initially S-57 “version 4” became IHO S-100, the “Universal Hydrographic Data Model”. S-100 is a far more ambitious project, to define an overarching global framework for the representation of any marine geospatial data within an open standard. Using the ISO19100 series framework for its defining principles, IHO S-100 defines the many elements needed to comprehensively model, represent, encode and portray digital datasets representing marine entities in many domains and subdomains. IHO S-100 defines individual “product specifications” covering many different types of marine geospatial data including electronic charts and publications, regulated and protected marine spaces, maritime limits and boundaries and maritime safety information.
+
+Coupled with a geospatial registry hosted at the IHO in Monaco, and supported by a number of ancillary IHO standards, S-100 represents the culmination of 20 years of progress and development in hydrographic thinking and is a unique achievement in the field of global geospatial standards.
+
+With the publication of S-100 edition 5.0.0, destined to be the framework for development of the next generation of ECDIS systems on ocean-going vessels for the next 20-30 years, and in the centenary of the founding of the IHO, the standard is finally approaching a level of maturity where widespread adoption will take place by participating hydrographic offices, industry and scientific implementers.  This adoption will run the course of 2020-2030, the IHO’s “Decade of Implementation”. 
+
+S-100 is the foundation for the e-Navigation community’s Common Maritime Data Structure (CMDS) standard as well as the foremost marine standard used by the United Nations Group on Global Geospatial Information Management (UN-GGIM) for implementation in pursuit of the UN’s Sustainable Development Goals.
+
+S-100 ushers in some significant changes to implementers of marine geospatial data under its product specifications.
+* Multiple product specifications. A potentially unlimited number of individual product specifications can be created, each with their own models, reusing feature and attribute definitions from the IHO geospatial registry. This diversity of different product specifications will enable S-100 to address multiple use cases, user groups and marine geospatial phenomena in its different user groups.
+* Model-Driven development. S-100 implements an abstract feature model, the GFM, which all product specifications implement. This fuses coverage and vector feature types and provides machine-readable schemas for all components
+* Dynamic feature and portrayal mechanisms driven by XML catalogues.
 
 ## Metadata and S-100.
 Due to the relatively rudimentary metadata specification in the existing S-57 standard, S-100 implemented an ISO19115 conformant metadata profile, which is, in turn implemented by each of the S-100 component product specifications.
@@ -56,12 +89,70 @@ The UML model for the S-100 metadata model is shown in the diagram below
 
 An example of dataset discovery metadata is
 ```xml
-<DatasetDiscoveryMetadata>
-  <fileName></fileName>
-</DatasetDiscoveryMetadata>
+    <S100XC:datasetDiscoveryMetadata>
+        <S100XC:S100_DatasetDiscoveryMetadata>
+            <S100XC:fileName>101AA00AA4X0000.000</S100XC:fileName>
+            <S100XC:filePath>101AA00AA4X0000</S100XC:filePath>
+            <S100XC:description>AA4X0000V41</S100XC:description>
+            <S100XC:dataProtection>false</S100XC:dataProtection>
+            <S100XC:protectionScheme>S100p154.0.0</S100XC:protectionScheme>
+            <S100XC:digitalSignatureReference>dsa</S100XC:digitalSignatureReference>
+            <S100XC:digitalSignatureValue>
+                <S100XC:signedPublicKey id="O=Internet Widgits Pty Ltd, ST=asd, C=ad">AAAAAAA=</S100XC:signedPublicKey>
+                <S100XC:digitalSignature>302D02147B0979262D94C4462C0D994585184093F1520C0602150081A7BA38A611F64559E52F52E5696F2040CF0C0E</S100XC:digitalSignature>
+            </S100XC:digitalSignatureValue>
+            <S100XC:classification ns1:isoType="mco:MD_ClassificationCode">
+                <mco:MD_ClassificationCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ClassificationCode" codeListValue="unclassified">unclassified</mco:MD_ClassificationCode>
+            </S100XC:classification>
+            <S100XC:purpose>new edition</S100XC:purpose>
+            <S100XC:specificUsage>
+                <ns13:MD_Usage>
+                    <ns13:specificUsage>
+                        <ns1:CharacterString>Transit</ns1:CharacterString>
+                    </ns13:specificUsage>
+                </ns13:MD_Usage>
+            </S100XC:specificUsage>
+            <S100XC:editionNumber>1</S100XC:editionNumber>
+            <S100XC:updateNumber>0</S100XC:updateNumber>
+            <S100XC:updateApplicationDate>2020-08-03</S100XC:updateApplicationDate>
+            <S100XC:issueDate>2020-08-03</S100XC:issueDate>
+            <S100XC:productSpecification>
+                <S100XC:name>S-101</S100XC:name>
+                <S100XC:version>010000</S100XC:version>
+                <S100XC:date>2018-12-01</S100XC:date>
+                <S100XC:number>101</S100XC:number>
+            </S100XC:productSpecification>
 ```
-S-100, as a framework standard, defines a number of product specifications, all of which have their own XML Feature Catalogue. 
-[TODO: Feature Catalogue and example]
+## The Feature Catalogue
+S-100, as a framework standard, defines a number of product specifications, all of which have their own XML Feature Catalogue. The feature catalogue is the main artefact of any S-100 product specification. The feature catalogue is the central definition of how data is arranged, its feature names, types, multiplicities and possible values. A small extract from the S-101 feature catalogue defining a depth area feature and its two primary attributes is shown below:
+
+```xml
+        <S100FC:S100_FC_FeatureType isAbstract="false">
+            <S100FC:name>Depth Area</S100FC:name>
+            <S100FC:definition>A water area whose depth is within a defined range of values.</S100FC:definition>
+            <S100FC:code>DepthArea</S100FC:code>
+            <S100FC:remarks>Intertidal areas are encoded as depth areas. These do not have to include soundings. The depth range within a depth area is defined by the attributes depth range maximum value and depth range minimum value.</S100FC:remarks>
+            <S100FC:alias>DEPARE</S100FC:alias>
+            <S100FC:definitionReference>
+                <S100FC:sourceIdentifier>262</S100FC:sourceIdentifier>
+                <S100FC:definitionSource ref="IHOREG"/>
+            </S100FC:definitionReference>
+            <S100FC:attributeBinding sequential="false">
+                <S100FC:multiplicity>
+                    <S100Base:lower>1</S100Base:lower>
+                    <S100Base:upper infinite="false">1</S100Base:upper>
+                </S100FC:multiplicity>
+                <S100FC:attribute ref="depthRangeMinimumValue"/>
+            </S100FC:attributeBinding>
+            <S100FC:attributeBinding sequential="false">
+                <S100FC:multiplicity>
+                    <S100Base:lower>1</S100Base:lower>
+                    <S100Base:upper infinite="false">1</S100Base:upper>
+                </S100FC:multiplicity>
+                <S100FC:attribute ref="depthRangeMaximumValue"/>
+            </S100FC:attributeBinding>
+```
+
 
 ## Our approach
 Traditionally metadata is defined as “metadata about data”. There are, essentially, two “data” models in S-100 then. The first is the S-100 General Feature model (GFM). This is how S-100 expresses “data” within its domain. Drawing heavily from ISO19100 and allied standards, the S-100 GFM provides a way of encoding marine phenomena in a structure defined within the framework’s parameters. These structures encode the entities, attributes and relationships from UML-based Application Schemas into  In practice, arbitrarily complex structures can be formulated to describe such phenomena, all instances of the S-100 GFM.
