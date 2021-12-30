@@ -295,8 +295,14 @@ The essential elements of the JSON structure used only S-100 simple attributes (
 The S-128 representation provides enough initial structure to implement pygeoapi with a FeatureCollection representing a service metadata instance. This was accomplished by configuring pygeoapi. The complete S-128 GeoJSON input used with pygeoapi is contained in the [setup](setup/) folder in this repository.
 
 ## Second implementation - S-57 and S-111 data structures.
+In order to construct a fuller representation the second implementation of the research made the following developments.
+
+* An implementation of pygeoapi using OGC Records API (instead of vanilla OGC API). Although a simple switch in pygeoapi this requires a different input data structure to be used and a more complex data transformation into tinyDB Catalogue (essentially GeoJSON mapping again)
+* A more concrete model of metadata structures conformant with IHO GFM and product specification creation. This also entails the creation of the IHO Feature catalogue for metadata.
+* Harvesting from S-57 and S-100 data products to create data and then output into the tinyDB format used by pygeoapi
 
 ## Third implementation - full S-57/S-100 metadata record creation.
+The third development was a more complete implementation within pygeoapi of the complete OGC API Records endpoint using Dutch ENC data, and with specialised harvesting of disaggregated feature content (named places was used as a test) alongside the other S-100 data. At this stage the S-100 to OGC API Records mappings were drafted and realised in the harvesting processes. A complete implementation using ENC data was demonstrated.
 
 ## Other outputs
 In arriving at these results a number of “interesting” byproducts have also been generated…
