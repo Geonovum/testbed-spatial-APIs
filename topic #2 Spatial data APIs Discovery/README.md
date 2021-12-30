@@ -7,7 +7,7 @@ This document contains the main report of the topic 2 project. It also doucments
 * pygeoapi setup instructions and configuration files (JSON, YAML)
 * tinyDB Catalogue (geoJSON + scripts for their creation)
 * Miscellaneous data manipulation tools (miscellaneous formats, python and jar libraries)
-* Documents, presentations and other notes from the project including all public briefing presentations.
+* Documents, presentations and other notes from the project including all public briefing presentations. [here](docs/)
 
 
 ## Background 
