@@ -2,12 +2,12 @@
 ## Content
 This document contains the main report of the topic 2 project. It also doucments references to its outputs, namely.
 
-* Model and Application Schema documentation outputs (Enterprise Architect / MS Word)
-* IHO Feature Catalogue construction and detailed description (XML)
-* pygeoapi setup instructions and configuration files (JSON, YAML)
-* tinyDB Catalogue (geoJSON + scripts for their creation)
+* Model and Application Schema documentation outputs (Enterprise Architect / MS Word) [model documentation](mdl/)
+* IHO Feature Catalogue construction and detailed description (XML) [feature catalogue](mdl/FC)
+* pygeoapi setup instructions and configuration files (JSON, YAML) [setup](setup)
+* tinyDB Catalogue (geoJSON + scripts for their creation) [setup](setup/tests/data/nl/)
 * Miscellaneous data manipulation tools (miscellaneous formats, python and jar libraries)
-* Documents, presentations and other notes from the project including all public briefing presentations. [here](docs/)
+* Documents, presentations and other notes from the project including all public briefing presentations [here](docs/).
 
 
 ## Background 
