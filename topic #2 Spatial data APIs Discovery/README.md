@@ -215,20 +215,84 @@ The other major advancement with this research process has been an initial surve
 
 ## Explanation of research project stages.
 The discrete steps taken were:
-1. The construction of a UML model using IHO encoding practices describing OGC API Records “content” and types.
+1. The construction of a UML model using IHO encoding practices describing OGC API Records “content” and types. This creates a metadata structure using the GFM (intended for encoding data content)
 2.	Mapping of existing IHO metadata structures into the OGC API Records features generated. Bespoke extensions have been accommodated in the model for existing S-57 charts, S-102 Dense Bathymetry, S-111 Surface currents and S-104 Water Levels.
-3.	Derivation of the model into component XML Feature Catalogue elements and realisation of abstract types and relationships within it. 
+3.	Derivation of the model into component XML Feature Catalogue elements and realisation of abstract types and relationships within it. This creates the essential product specification artifacts for the expression of metadata within the IHO GFM.
 4.	Use of feature catalogue to construct, programmatically, features representing each OGC API Record for a number of domains. The domains chosen were.
-*	Electronic Chart Data in S-57 format for US and the Netherlands
+* Electronic Chart Data in S-57 format for US and the Netherlands
 * Surface current datasets conforming to IHO S-111 from NOAA
 5. Construction of test datasets conforming to the feature catalogue record structure and located in a cloud server in an open database schema
 6. Aggregation of metadata records and exposure in OGC API Records form using pygeoapi for OGC API Records. This involves the construction of OGC API Records encodings in geojson encapsulated in tinydb catalogue entries. 
-7.	Testing using pygeoapi server, GIS and programmatically
+7.	Testing using pygeoapi server, GIS and programmatically... 
 8.	Writing up results (this document)
 
 ## First implementation - S-128 data structures.
-The first implementation of the research surrounds 
+The first implementation of the research surrounded the IHO S-128 product specification. S-128 is an unusual product specification as it represents service metadata as S-100 GFM data. It is not intended for structured metadata representation (S-128 is used to contain dataset issue and update dates/times and is used in ECDIS to ascertain if ECDIS data holdings are up to date in line with the SOLAS convention). S-128, though, provides a good initial structure.
 
+In order to provide the initial S-128 implementation an S-128 dataset was created from S-57 data and then encoded into JSON. This provides the initial mapping from S-100's GFM into a JSON structure.
+
+```JSON
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "featureType": "ElectronicChart",
+        "id": "US30029K.000",
+        "typeOfProductFormat": "ISO/IEC 8211",
+        "chartNumber": "US30029K.000",
+        "compilationScale": "45000",
+        "producerCode": "US",
+        "copyright": "not applicable",
+        "editionDate": "2019-04-05",
+        "editionNumber": "1",
+        "issueDate": "2013-09-26",
+        "productType": "ENC",
+        "specificUsage": "approach",
+        "updateDate": "0",
+        "updateNumber": "0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -31.5,
+              -76.833333
+            ],
+            [
+              -37.5,
+              -76.833333
+            ],
+            [
+              -37.5,
+              -78.333333
+            ],
+            [
+              -31.5,
+              -78.333333
+            ],
+            [
+              -31.5,
+              -76.833333
+            ]
+          ]
+        ]
+      }
+    },
+```
+The essential elements of the JSON structure used only S-100 simple attributes (essentially key/value pairs in the S-100 GFM) and only string values, thus a simple properties Object for each S-100 S-128 feature can contain each value defined with names mapped from the feature catalogue entities. This JSON representation is created from source ENC data harvested from the existing S-57/S-63 PRODUCTS.TXT packaged with each S-63 dataset and contains values for:
+
+* edition date
+* edition number
+* update number
+* usage
+* cell name
+* producer code
+
+
+The S-128 representation provides enough initial structure to implement pygeoapi with a FeatureCollection representing a service metadata instance. This was accomplished by configuring pygeoapi. The complete S-128 GeoJSON input used with pygeoapi is contained in the [setup](setup/) folder in this repository.
 
 ## Second implementation - S-57 and S-111 data structures.
 
