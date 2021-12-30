@@ -401,23 +401,51 @@ For S-57 data the harvesting produces example OGC API Records features as below.
           -68.3316306,
 ```
 
+
+## Model created for OGC API Records
+The model created for OGC API Records conforms to the IHO's modelling conventions. The essential characteristics are:
+
+* Stereotypes of FeatureType, InformationType, ComplexAttribute and Enumeration are used for the basic S-100 modelling elements
+* An additional SimpleAttributes stereotype is used to gather simple attributes used throughout the model
+* A simple basic OGC API Records abstract feature is created (essentially, a specialisation of S100_GF_Feature). This is populated with non-product-specific OGC API Records fields. 
+* This abstract record is extended for each IHO Product Specification which is required. Any product-specific customisations are added into the specialised FeatureType. In the example created S-102, S-111, S-104 and ENC are created. The specialised attributes come from product specification metadata defined by individual product specifications. For instance, the S102_OGCAPIRec FeatureType defines a griddingMethod attribute used only to describe S-102 data and which is capable of holding any of the values of the enumeration griddingMethod. 
+* The ENC FeatureType includes NamedPlace attribute (multiplicity 0..\*) which holds any number of named places included in the ENC dataset. These are harvested from ENC from any feature with named Sea Areas, Land Areas or Administrative Areas. Such specialisations show how metadata structures can be easily tailored to include important fields for increased discoverability.
+* In the interests of discoverability the navigationalPurpose attribute uses the navigational terms rather than the numeric codes defined under ENC usage band.
+
+The simple model is shown in the following UML diagram.
+
+![image](https://user-images.githubusercontent.com/3368156/144290230-c436eff0-f0b8-402c-8b66-89531cf30830.png)
+
+A fuller description of the model and a dump of all classes, attributes as an EA Microsoft Word extract is in the [model folder](mdl/) 
+
+## Feature Catalogue for OGC API Records.
+
+From the UML Model an initial feature catalogue is derived. This is conformant with S-100's feature catalogue XML Schema and contains all the elements necessary to use in any S-100 conformant data production tool. API access to the S-100 GFM was used to programmatically create harvested metadata records.
+
+## Mapping from IHO Fields to OGC API Records
+
+The mappings made from IHO S-100 to OGC API Records are illustrated in the model screenshot below. These can also be inspected in more detail in the EA model in this repository [here](mdl/)
+
+![image](https://user-images.githubusercontent.com/3368156/144292136-f1b853e2-20f5-40fe-aaf3-a686c8f70cd3.png)
+
+Most of the mappings are intuitive. OGC API Records only has a small number of mandatory field name/values. These are defined as follows:
+* recordID - the cellname. Guaranteed by S-101/S-57 to be unique.
+* type - "record" default
+* title - set to cellname. ENCs do not (currently) contain structured titles but if defined (in S-100 Part 4a metadata these can be used instead)
+
+Other fields set from the harvested data are:
+* description ("Electronic Naivgational Chart")
+* recordCreated - date the metadata record was created
+* created - issue data of the dataset itself (its edition date)
+* themes - (Oceans,navigation,currents)
+
+these are shown in the model and can be inspected in the EA version. 
+
 ## Other outputs
 In arriving at these results a number of “interesting” byproducts have also been generated…
 1.	A mapping of IHO feature data to a generic geoJSON encapsulation which can be used for a data structure template mapping IHO GFM to OAS specifications. This is described above and would require some more formal description to be used further. The basic principles are sound, however, and a simple recursive definition would appply across all S-100 GFM conformant vector (and, potentially, coverage) product specifications.
 2.	Mappings from existing IHO file formats have been accomplished. These map from S-57 PRODUCTS.TXT Service Metadata and also individually harvest data from unencrypted S-57 charts (kindly released by the Netherlands HO for the project). 
 3.	S-128 mappings have been produced which conform to the existing S-128 prodict specification. These use the S-128 feature model and translate to OAS conformant data structures which can be seamlessly embedded in OGC API.
 
-## Model created for OGC API Records
 
-
-![image](https://user-images.githubusercontent.com/3368156/144290230-c436eff0-f0b8-402c-8b66-89531cf30830.png)
-
-## Feature Catalogue for OGC API Records.
-
-[TODO]
-
-## Mapping from IHO Fields to OGC API Records
-
-[TODO]
-![image](https://user-images.githubusercontent.com/3368156/144292136-f1b853e2-20f5-40fe-aaf3-a686c8f70cd3.png)
 
