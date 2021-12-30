@@ -153,9 +153,40 @@ S-100, as a framework standard, defines a number of product specifications, all 
             </S100FC:attributeBinding>
 ```
 
+# Research under Topic 2
 
 ## Our approach
-Traditionally metadata is defined as “metadata about data”. There are, essentially, two “data” models in S-100 then. The first is the S-100 General Feature model (GFM). This is how S-100 expresses “data” within its domain. Drawing heavily from ISO19100 and allied standards, the S-100 GFM provides a way of encoding marine phenomena in a structure defined within the framework’s parameters. These structures encode the entities, attributes and relationships from UML-based Application Schemas into  In practice, arbitrarily complex structures can be formulated to describe such phenomena, all instances of the S-100 GFM.
+Traditionally metadata is defined as “metadata about data”. Keeping in mind the introduction section, there are, essentially, two “data” models in S-100 then. The first is the S-100 General Feature model (GFM). This is how S-100 expresses “data” within its domain. Drawing heavily from ISO19100 and allied standards, the S-100 GFM provides a way of encoding marine phenomena in a structure defined within the framework’s parameters. These structures encode the entities, attributes and relationships from UML-based Application Schemas into GFM "instances".
+
+In practice, arbitrarily complex structures can be formulated to describe such phenomena, all instances of the S-100 GFM and all conforming to the feature catalogue structure defined by the standard, for example a simple XML encoding of a feature encoded as :
+
+![image](https://user-images.githubusercontent.com/3368156/147746641-31420660-b018-46e6-9309-e9fadc9c9569.png)
+
+is:
+
+```xml
+<S-127:RadioCallingInPoint id="Placentia Bay2A">
+  <a href="#Placentia Bay Section 1" role="componentOf"
+    <featureName>
+      <name>2A</name>
+    </featureName>
+    <trafficFlow>inbound</trafficFlow>
+    <textContent>
+      <information>
+        <language>eng</language>
+        <text>Inbound</text>
+      </information>
+      <information>
+        <language>fra</language>
+        <text>Entrant</text>
+      </information>
+    </textContent>
+  </S-127:RadioCallingInPoint>
+</member>
+```
+
+where a feature catalogue defines the feature names, attributes, types and multiplicities.
+
 The second “data” model is the metadata model, as defined in the previous section. This is also UML based but has a separate XML encoding drawn from the ISO model templates and using many of the ISO XML schemas.
 
 The challenge of the research, then, is twofold
@@ -167,13 +198,16 @@ In order to approach these challenges realistically some examples have been draw
 * IHO S-57 (and S-101). The most ubiquitous of all IHO product specificaitons, S-57 is the standard for electronic charts and a mandated standard for Coastal states under the IMO SOLAS convention. 
 * IHO S-100 product specifications, S-111 and S-102 - these product specifications represent mature developed product specifications under the IHO's S-100 framework and have well-evolved metadata models within their defined standards.
 
-The “OGC API” family of standards has evolved from a long period of user consultation rationalising many of the perceived shortcomings of the (very) prescriptive W*S standards of the previous generation. OGC API provides an “essentially” content neutral model for defining (using OAS) “content” and webservices to access it. To date, no robust mapping from the S-100 GFM has been made to OGC API / OAS. Although not technically "difficult" the two models remain fairly distant from each other in a number of domains and a structured approach which can be reused for multiple IHO use cases is still challengin.
+The “OGC API” family of standards has evolved from a long period of user consultation rationalising many of the perceived shortcomings of the (very) prescriptive WMS/WFS standards of the previous generation. OGC API provides an “essentially” content neutral model for defining (using OAS) “content” and webservices to access it. To date, no robust mapping from the S-100 GFM has been made to OGC API / OAS. Although not technically "difficult" the two models remain fairly distant from each other in a number of domains and a structured approach which can be reused for multiple IHO use cases is still challengin.
 
-The crucial observation within the reseafch presented here is that the OGC API methodology is what is extended for the construction of metadata using OGC API Records. OGC API Records is another OGC API type, just like the data it describes. There are more mandatory fields but the structure is essentially the same.
+The crucial observation within the research presented here is that *the OGC API methodology is what is extended for the construction of metadata using OGC API Records. OGC API Records is another OGC API type, just like the data it describes. There are more mandatory fields but the structure is essentially the same.*
+
+![image](https://user-images.githubusercontent.com/3368156/147746892-2654bd3c-35b2-4991-a4a9-0a2eba85767c.png)
+
 
 From this observation an approach for S-100 begins to emerge. If a single mapping from IHO to OGC API is required then metadata can also be covered within that. Using the S-100 GFM a model for metadata which mirrors the OGC API Records structure (essentially, itself, an ISO19115 profile) can be built and extended for each product specification as required. This is the approach the research project has taken to address the core problem of expressing IHO data in structured OGC API Records.
 
-The other major advancement with this research process has been an initial survey of how to convert data representing an instance of the S-100 General Feature Model to a representation compatible with OGC API standards. OGC API standards are very general and "content neutral" in the extreme but a family/profile can be drawn based on the constraints documented in S-100.
+The other major advancement with this research process has been an initial survey of how to convert data representing an instance of the S-100 General Feature Model to a representation more compatible with modern web development (better for broader uses of data) and OGC API standards. OGC API standards are very general and "content neutral" in the extreme but a family/profile can be drawn based on the constraints documented in S-100.
 
 ## Explanation of research project stages.
 The discrete steps taken were:
@@ -190,7 +224,6 @@ The discrete steps taken were:
 
 ## First implementation - S-128 data structures.
 The first implementation of the research surrounds 
-[TODO]
 
 
 ## Second implementation - S-57 and S-111 data structures.
