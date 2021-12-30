@@ -304,15 +304,112 @@ In order to construct a fuller representation the second implementation of the r
 ## Third implementation - full S-57/S-100 metadata record creation.
 The third development was a more complete implementation within pygeoapi of the complete OGC API Records endpoint using Dutch ENC data, and with specialised harvesting of disaggregated feature content (named places was used as a test) alongside the other S-100 data. At this stage the S-100 to OGC API Records mappings were drafted and realised in the harvesting processes. A complete implementation using ENC data was demonstrated.
 
+The example below shows how an S-127 (for example) feature can be expressed in a JSON encoding conformant with IHO Feature Catalogue structures. The essential points are:
+
+* Each feature is a single GeoJSON feature. A FeatureCollection has to be provided as well but there is no equivalent of dataset level metadata in the JSON encoding. Features are an array value of "features" in the FeatureCollection
+* Each feature is type "Feature" (in our metadata encoding this is "record"
+* All attribute (and sub-attribute names) are the defined feature catalogue codes (not names as they have spaces in them)
+* Simple Attributes are mapped to individual key/value objects.
+* Enumeration values are described using their values rather than their integer codes.
+* Simple Attributes with multiplicity >1 are arrays of values (as they all have the same attribute names), e.g. communication channel below
+* complex attributes are represented as objects with the sub-attributes as the value. The name of the sub-attribute is the FC code. (e.g. fixedDateRange below)
+* sub-attributes with multiplicity > 1 are represented as arrays of objects (e.g. FeatureName below)
+
+```JSON
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "RDOCAL1",
+      "properties": {
+        "communicationChannel": [
+          "B20",
+          "B14"
+        ],
+        "fixedDateRange": {
+          "endDate": "2021-06-01",
+          "startDate": "2021-05-01"
+        },
+        "orientation": "25.6",
+        "periodicDateRange": {
+          "endDate": "2021-01-01"
+        },
+        "featureName": [
+          {
+            "name": "the lizard",
+            "language": "eng"
+          },
+          {
+            "name": "le lizard",
+            "language": "fra"
+          }
+        ],
+        "textContent": {
+          "information": [
+            {
+              "text": "tc1"
+            },
+            {
+              "text": "tc2"
+            }
+          ]
+        },
+        "callSign": "B19"
+```
+
+this structure produces conformant GeoJSON for IHO GFM data.
+
+For S-57 data the harvesting produces example OGC API Records features as below. here 
+
+```JSON
+{
+  "type": "Feature",
+  "id": "NL5BO120.000",
+  "properties": {
+    "namedPlaces": [
+      "Bocht van Goto",
+      "Klein Bonaire",
+      "BONAIRE"
+    ],
+    "copyright": "",
+    "formats": "S57/ISO 8211",
+    "created": "20200806",
+    "compilationScale": "12000",
+    "description": "Electronic Navigational Chart ",
+    "type": "record",
+    "title": "NL5BO120.000",
+    "specificUsage": "Harbour",
+    "themes": [
+      "oceans",
+      "navigation",
+      "currents"
+    ],
+    "_metadata-anytext": "7e46_",
+    "publisher": "NL",
+    "recordCreated": "2021-11-18"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -68.3316306,
+          12.1097488
+        ],
+        [
+          -68.3316306,
+```
+
 ## Other outputs
 In arriving at these results a number of “interesting” byproducts have also been generated…
-1.	A mapping of IHO feature data to a generic geoJSON encapsulation which can be used for a data structure template mapping IHO GFM to OAS specifications. 
+1.	A mapping of IHO feature data to a generic geoJSON encapsulation which can be used for a data structure template mapping IHO GFM to OAS specifications. This is described above and would require some more formal description to be used further. The basic principles are sound, however, and a simple recursive definition would appply across all S-100 GFM conformant vector (and, potentially, coverage) product specifications.
 2.	Mappings from existing IHO file formats have been accomplished. These map from S-57 PRODUCTS.TXT Service Metadata and also individually harvest data from unencrypted S-57 charts (kindly released by the Netherlands HO for the project). 
 3.	S-128 mappings have been produced which conform to the existing S-128 prodict specification. These use the S-128 feature model and translate to OAS conformant data structures which can be seamlessly embedded in OGC API.
 
 ## Model created for OGC API Records
 
-[TODO]
+
 ![image](https://user-images.githubusercontent.com/3368156/144290230-c436eff0-f0b8-402c-8b66-89531cf30830.png)
 
 ## Feature Catalogue for OGC API Records.
