@@ -53,18 +53,29 @@ In addition, we will also determine the cost of building a library. This is rele
 ### Demonstration with QGis
 The first way to demonstrate benefit is by demonstrating the datasource being accessed by an OGC client, QGis. We will not demonstrate all the capabilities of OGC clients; there are ample examples available on the Internet.
 
-### Benefit of API interview
+### Benefit of API - expert interview
 The main question of the API interview is: is there a benefit in enriching an existing convenience API with an OGC API Features implementation?
 
-<why interview; choice for format - closed interview
+The interview question is clear. This leads to a conclusive format. We have therefore choosen a closed expert interview as the means of measuring benefit of the OGC API.
 
-The interview will be conducted with IHW. They are responsible for standards in the water industry. The datasource of RWS is used, among other things, for this purpose. This makes IHW relevant and knowledgeable, and therefore a suitable candidate.
+The interview will be conducted with Informatiehuis Water (IHW). They are responsible for standards in the water industry. The water industry has a convenience API known as Digitale Delta API. This makes IHW relevant and knowledgeable, and therefore a suitable candidate. We will interview John Maaskant, who is advisor on data and information management with IHW. He is also affiliated with the Dutch waterauthority (Rijkswaterstaat).
 
 We have identified the following questions:
 - Introduction. Explain the OGC standards (if required) and give a quick demo with the QGis client.
 - Question #1: Does the addition of the OGC API Features implementation provide any benefit for collaboration in your industry?
-- Question #2: Is it feasible to add an OGC implementation to the supported standards? This question must be approached from multiple perspectives (economical, social, organisational, cultural, etc)
+- Question #2: Is it feasible to add an OGC implementation to the supported standards? This question must be approached from multiple perspectives (economical, social, organizational, cultural, etc)
 - Question #3 (if applicable): Why is it not feasible?
+
+The response from IHW was as follows:
+> The addition of the new OGC API standards can deliver a lot of value for the water sector. It allows GIS software to connect to datasources in water sector. This will vastly open up the industry to all sorts of innovation. This innovation can come from the functionality of existing GIS software as well as new software that is OGC compliant. Also, the addition of an OGC API implementation can suppress or prevent vendor lock-in positions.
+>
+> In order for this to work though, the OGC API Features is not sufficient. An OGC API standard for timeseries is also required, given that the data is about time based measurements.
+>
+> Economically, an implementation must be done in a way that minimal investment is required. There are initiatives that allow us to expose the DD-API easily using very little investment in software. IHW uses a FAIR connector for connectivity with and between the industry. This allows to change only one system in order to enable the OGC API for the entire industry. This path, or a comparable one, must be taken, otherwise many software systems must be adapted, which is costly.
+>
+> Socially and organizationally, it takes time to implement the OGC API specifications alongside the DD-API, given that many organizations have done extensive investments into the DD-API and may view the OGC API as a competitor instead of an addition.
+>
+> Culturally, we would to stress that the governmental culture in the Netherlands is decentralized (or federated). Although IHW is the (legally) formal owner of the specifications, it cannot dictate changes to the participants in the industry. Compliance and cooperation must be achieved through extensive collaboration (so called 'polderen'). As such, implementation must be done at a small scale and then be expanded. Use updates and development of new systems as opportunities to implement the OGC standard.
 
 ### Determining effort cost
 The total cost of adding an OGC API Features implementation consists of adding the API, the implementation cost, added with the cost of maintaining a larger codebase. We will take some industry standards to determine both the cost of implementation as well as the cost of maintenance.
@@ -101,13 +112,13 @@ With respect to maintenance, we estimate this by adding a certain factor to the 
 
 These assumptions give us the following cost per 1000 lines of code including maintenance:
 
-| Cost with maintenance | Formula | Cost |
-| -- | -- | -- |
-| Maintenance over 10 years | 0.15 * 10 | 1.5 |
-| Multiplication factor | 1 + 1.5 | 2.5 |
-| Average cost including maintenance | 11,111 * 2.5 | 27,778 |
-| Minimum cost including maintenance | 7,407 * 2.5 | 18,518 |
-| Maximum cost including maintenance | 16,667 * 2.5 | 41,668 |
+| Cost with maintenance               | Formula       | Cost    |
+| --                                  | --            | --      |
+| Maintenance over 10 years           | 0.15 * 10     | 1.5     |
+| Multiplication factor               | 1 + 1.5       | 2.5     |
+| Average cost including maintenance  | 11,111 * 2.5  | 27,778  |
+| Minimum cost including maintenance  | 7,407 * 2.5   | 18,518  |
+| Maximum cost including maintenance  | 16,667 * 2.5  | 41,668  |
 
 ## Library
 The library can be found at https://github.com/purple-polar-bear/go-ogc-api . It's is extracted from the OGC API Features implementation of the Goaf project. At the time of writing this report, it contains an implementation of the core part and the feature part.
@@ -157,7 +168,7 @@ router.HandleFunc(regexp.MustCompile("^"+mountingPath), engine.HTTPHandler)
 
 The readme of the library contains a code fragment that implements the datasource. The readme can be found at https://github.com/purple-polar-bear/go-ogc-api
 
-### Implemenation result
+### Implementation result
 
 #### Code review
 
@@ -177,11 +188,31 @@ With respect to ease of expansion, there is decoupling in the following function
 | Original Goaf project         | 1994 |
 | Goaf without implementation   |  ??? |
 | Code required to run library  |  128 |
-| Library                       | 2300 |
+| Library                       | 1631 |
 
 From the measurements, we can conclude the codesize of the implementation from scratch to be the difference between the original Goaf project and the Goaf project without the implementation: TODO
 
 This leads to the following cost estimates:
+
+### Implementing library
+When implementing the specifications in the library, the developers had the following experience:
+- Experience in working with Geodata, including implementing the OGC WFS 2.0 standard
+
+The developers had the following subjective observations:
+- Implementing the collections and features part is straightforward and can be done relatively easily.
+- Implementing the linking part of the library is tricky; the library must have knowledge about the paths at which it is served in order to create the links.
+- The HTML implementation is only relevant for services that are open to the public or that must serve the data in HTML format. If a non-open service is build that is only used by GIS clients (such as QGis), the HTML templates don't have any value.
+- The OpenAPI specification is a lot of work to implement. We also see little added value, given that GIS clients natively understand the API specification; they don't need the OpenAPI part to understand the API itself.
+
+### OGC Teamengine
+The library was rated against the OGC Teamengine testsuite. This led to the following results:
+- Cryptic messages
+- Possible bugs in Teamengine
+- due to cryptic messages, looking for tests itself. Cannot find underlying ctl's easily.
+- Overall difficult and frustrating
+
+### Comparison with WFS2
+TODO: Subjective comparison with WFS2
 
 ## Results
 
@@ -195,6 +226,7 @@ TODO
 
 ### Reception of library
 
+TODO
 
 ## Conclusion
 This leads to the following conclusions:
