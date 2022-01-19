@@ -4,15 +4,19 @@ This document contains the main report for topic #4. It also contains the list o
 
 This topic is researched using the following projects:
 - Goaf. Goaf is a Golang implementation of the OGC API Features API. This project can be found at https://github.com/PDOK/goaf
-- go-ogc-api. Go-ogc-api is the Golang library that contains an implementation of the OGC API Features. It allows developers to easily build an OGC API Features enabled application. This project can be found at <insert location>
-- RML. This project uses the library to display data from an RWS datasource containing, among other things, locations.
+- go-ogc-api. Go-ogc-api is the Golang library that contains an implementation of the OGC API Features. It allows developers to easily build an OGC API Features enabled application. This project can be found at https://github.com/purple-polar-bear/go-ogc-api
 
 ### Summary
-This topic is concerned with a comparison between a convenience API and the OGC Features API. The report takes an existing (convenience) API
-and investigates the costs and benefits of adding the OGC Features API to it. <summary of findings>
+This topic is concerned with a comparison between a convenience API and the OGC Features API. The report takes an existing (convenience) API and investigates the costs and benefits of adding the OGC Features API to it.
+
+The main conclusion of this report is that there are use cases where adding an OGC API implementation to an existing convenience API can provide great benefit. Important to realize is that the cost of adding an OGC API implementation is relatively low, if a library responsible for serving the API is already present. Without a library, the cost of implementing the OGC API specifications can be (too) high.
 
 ## Research question
-<intro verhaal>
+This chapter will expand upon the research question. It will scope the research topic and it will outline the general approach. The subsequent chapters will cover the following:
+- Method. Explains the research methods used, why we use them and how we use them.
+- Library. The library we built. It explains the design goals and overall design.
+- Results. The results of the research actions.
+- Conclusions. The conclusions of the report.
 
 ### Goal
 The goal of this research topic is to discover the usefulness and feasibility of the combination of an OGC API Features implementation and a convenience API. Usefulness of an API can be determined by investigating the benefits of having two API's. The feasibility can be determined by investigating the costs.
@@ -31,7 +35,7 @@ This research is limited by the following constraints:
 ### Approach
 The approach to this topic is to delve into the OGC API Features and to investigate the investment and possible return of adding an OGC API Features compliant endpoint to an existing service.
 
-To do this, we will start with an existing convenience API. This is done by taking the API from an existing open system by a Dutch organisation called 'Rijkswaterstaat' that contains location and water quality an quantity measurements. We will only take a look at the location part of their API. We will create a proxy server that will serve this data and add an OGC API Features implementation to this server.
+To do this, we will start with an existing convenience API. This is done by taking the API from an existing open system by a Dutch organisation called 'Kadaster' that contains location data. We will investigate the full potential with a datasource containing water quality an quantity measurements for the Dutch water authorities (Rijkswaterstaat en waterschappen). For the latter, we will only take a look at the location part of their API.
 
 Usefulness will be determined by investigating the benefits. The benefits will be determined in two ways. First, we will look into the functionality that is available if data is accessible via the OGC API Features. The convenience API is very particular and will not be understood by generic software. Practically, we will examine the data using the QGis viewer, since this viewer cannot access the data via the convenience API, but it can access the data via the OGC API Features implementation.
 
@@ -50,13 +54,16 @@ Feasibility will be determined by looking into the cost of implementing and main
 In addition, we will also determine the cost of building a library. This is relevant, as it gives us a estimate into the cost of initial adaptation for a given programming language.
 
 ## Method
+
+Given the complexity of the research topic, we will approach the questions using a variety of different methods. The results from these methods will be combined into a single set of conclusions. The overall method is therefore a case study.
+
 ### Demonstration with QGis
 The first way to demonstrate benefit is by demonstrating the datasource being accessed by an OGC client, QGis. We will not demonstrate all the capabilities of OGC clients; there are ample examples available on the Internet.
 
 ### Benefit of API - expert interview
 The main question of the API interview is: is there a benefit in enriching an existing convenience API with an OGC API Features implementation?
 
-The interview question is clear. This leads to a conclusive format. We have therefore choosen a closed expert interview as the means of measuring benefit of the OGC API.
+The interview question is clear. We want to test a specific hypotheses in a qualitative way. This leads to a conclusive format. We have therefore chosen a expert interview with closed questions as the means of measuring benefit of the OGC API.
 
 The interview will be conducted with Informatiehuis Water (IHW). They are responsible for standards in the water industry. The water industry has a convenience API known as Digitale Delta API. This makes IHW relevant and knowledgeable, and therefore a suitable candidate. We will interview John Maaskant, who is advisor on data and information management with IHW. He is also affiliated with the Dutch waterauthority (Rijkswaterstaat).
 
@@ -65,17 +72,6 @@ We have identified the following questions:
 - Question #1: Does the addition of the OGC API Features implementation provide any benefit for collaboration in your industry?
 - Question #2: Is it feasible to add an OGC implementation to the supported standards? This question must be approached from multiple perspectives (economical, social, organizational, cultural, etc)
 - Question #3 (if applicable): Why is it not feasible?
-
-The response from IHW was as follows:
-> The addition of the new OGC API standards can deliver a lot of value for the water sector. It allows GIS software to connect to datasources in water sector. This will vastly open up the industry to all sorts of innovation. This innovation can come from the functionality of existing GIS software as well as new software that is OGC compliant. Also, the addition of an OGC API implementation can suppress or prevent vendor lock-in positions.
->
-> In order for this to work though, the OGC API Features is not sufficient. An OGC API standard for timeseries is also required, given that the data is about time based measurements.
->
-> Economically, an implementation must be done in a way that minimal investment is required. There are initiatives that allow us to expose the DD-API easily using very little investment in software. IHW uses a FAIR connector for connectivity with and between the industry. This allows to change only one system in order to enable the OGC API for the entire industry. This path, or a comparable one, must be taken, otherwise many software systems must be adapted, which is costly.
->
-> Socially and organizationally, it takes time to implement the OGC API specifications alongside the DD-API, given that many organizations have done extensive investments into the DD-API and may view the OGC API as a competitor instead of an addition.
->
-> Culturally, we would to stress that the governmental culture in the Netherlands is decentralized (or federated). Although IHW is the (legally) formal owner of the specifications, it cannot dictate changes to the participants in the industry. Compliance and cooperation must be achieved through extensive collaboration (so called 'polderen'). As such, implementation must be done at a small scale and then be expanded. Use updates and development of new systems as opportunities to implement the OGC standard.
 
 ### Determining effort cost
 The total cost of adding an OGC API Features implementation consists of adding the API, the implementation cost, added with the cost of maintaining a larger codebase. We will take some industry standards to determine both the cost of implementation as well as the cost of maintenance.
@@ -152,25 +148,44 @@ The datasource consists of providing an implementation of five methods:
 
 The following code fragment shows the minimum requirements for creating the engine and mounting it inside an existing router.
 
-```ruby
-engine := apif.NewSimpleEngine(mountingPath)
-apif.AddBaseJSONTemplates(engine)
-apif.AddBaseHTMLTemplates(engine)
+```go
+func EnableOGCAPIFeatures() {
+  mountingPath := "/package"  
+  engine := apif.NewSimpleEngine(mountingPath)
+  apif.AddBaseJSONTemplates(engine)
+  apif.AddBaseHTMLTemplates(engine)
 
-featuredatasource := myDatasourceImplementation.NewImplementation()
-apif.EnableFeatures(engine, featuredatasource)
-apif.AddFeaturesJSONTemplates(engine)
-apif.AddFeaturesHTMLTemplates(engine)
+  featuredatasource := myDatasourceImplementation.NewImplementation()
+  apif.EnableFeatures(engine, featuredatasource)
+  apif.AddFeaturesJSONTemplates(engine)
+  apif.AddFeaturesHTMLTemplates(engine)
 
-engine.RebuildOpenAPI()
-router.HandleFunc(regexp.MustCompile("^"+mountingPath), engine.HTTPHandler)
+  engine.RebuildOpenAPI()
+  router.HandleFunc(regexp.MustCompile("^"+mountingPath), engine.HTTPHandler)
+}
+```
+
+In order to provide a datasource implementation for features, the following methods must be implemented:
+
+```go
+type FeatureService interface {
+  Collections() []featuremodels.Collection
+  Collection(string) featuremodels.Collection
+  Features(*http.Request, *featuremodels.FeaturesParams) featuremodels.Features
+  Feature(string, string) *featuremodels.Feature
+  BuildOpenAPISpecification(builder coreservices.OpenAPIBuilder)
+}
 ```
 
 The readme of the library contains a code fragment that implements the datasource. The readme can be found at https://github.com/purple-polar-bear/go-ogc-api
 
-### Implementation result
+## Results
+This chapter contains the results from our research.
 
-#### Code review
+### Library
+Before we dive into the benefits and the cost of an additional OGC API Features implementation, we will look into the results of the library development.
+
+#### Code review on library
 
 The design of the library as well as the implementation have been submitted to the project owners of Goaf (a team of Kadaster). They were asked to criticize the design. They find the implementation, at face value, sufficient for further exploration. They want to use this library for a different project. The have also stated that a conclusion cannot be drawn without actual using the code in a different project.
 
@@ -181,22 +196,9 @@ With respect to ease of expansion, there is decoupling in the following function
 - The library contains default json and html templates. However, these templates can be replaced by other json or html templates. This leads to ease of expansion with respect to the (most) common templates.
 - A developer can easily add other template formats, such as Geopackage. This can be done by simple adding other templates to a service. This leads to ease of expansion with respect to output formats.
 
-#### Code size & cost estimate
-
-| Measurement                   | CLOC size |
-| --                            | -- |
-| Original Goaf project         | 1994 |
-| Goaf without implementation   |  ??? |
-| Code required to run library  |  128 |
-| Library                       | 1631 |
-
-From the measurements, we can conclude the codesize of the implementation from scratch to be the difference between the original Goaf project and the Goaf project without the implementation: TODO
-
-This leads to the following cost estimates:
-
-### Implementing library
+#### Subjective experience of library development
 When implementing the specifications in the library, the developers had the following experience:
-- Experience in working with Geodata, including implementing the OGC WFS 2.0 standard
+- Experience in working with Geodata, including implementing the OGC WFS 2.0 standard.
 
 The developers had the following subjective observations:
 - Implementing the collections and features part is straightforward and can be done relatively easily.
@@ -204,31 +206,77 @@ The developers had the following subjective observations:
 - The HTML implementation is only relevant for services that are open to the public or that must serve the data in HTML format. If a non-open service is build that is only used by GIS clients (such as QGis), the HTML templates don't have any value.
 - The OpenAPI specification is a lot of work to implement. We also see little added value, given that GIS clients natively understand the API specification; they don't need the OpenAPI part to understand the API itself.
 
-### OGC Teamengine
-The library was rated against the OGC Teamengine testsuite. This led to the following results:
-- Cryptic messages
-- Possible bugs in Teamengine
-- due to cryptic messages, looking for tests itself. Cannot find underlying ctl's easily.
-- Overall difficult and frustrating
+#### Subjective comparison with WFS2 standard
+We found the following differences in implementation with respect to the WFS2.0 standard:
+- The OGC API Features uses links to the next page when serving features. We did not find this easy to use; using links means you have to reproduce the URL that was requesting the page which is more complex to do than adding a boolean indicating a next page, or implicitly signaling that a next page exists if you return the maximum requested items. The WFS20 implementation also uses links, but primarily during the GetCapabilities function. To add links to all the pages make a (fast) implementation more difficult. Under the assumption of not using any advanced features (such as queries), we find the WFS2.0 implementation easier.
+- The OpenAPI specification is not necessary if you know you are dealing with an specific standard. You can find all the collections from the landingpage. From the collection, you can find all the items/ features. The OpenAPI specification is mandatory for OGC API Features, WFS2.0 does not have them. We therefore find the WFS2.0 implementation to be easier.
 
-### Comparison with WFS2
-TODO: Subjective comparison with WFS2
+#### Known issues
+During the development of the library we encountered the following bugs:
+- The OpenAPI specification does not pass the OGC Teamengine test suite.
 
-## Results
+The library was rated against the OGC Teamengine testsuite. We encountered the following issues with the OGC Teamengine testsuite:
+- The response messages are cryptic. They do not clearly indicate what the problem is. For example, one of our message was 'cannot find /conformance'. However, upon manual inspection, the path does work, it does resolve and it returns the correct data.
+- Because of the cryptic feedback messages, we looked into the templates (CTL's) that are generating them. However, we could not find the underlying CTL's. This made further debugging of the problem sufficiently high to not possible.
+- This led working with Teamengine to be cumbersome and frustrating. This can be seen as a problem, as it hinders adaptability.
+- There are many references to OGC API libraries. Currently, the go-ogc-api is not present on any of the lists. Adding these references will increase visibility of the library, thus improving adaptability.
 
-### Benefits
+### Benefits - QGis viewer
 
-TODO
+Below is an image of QGis with the datasource loaded as OGC API Feature set using the library:
+
+![](qgis.png)
+
+You can clearly see that the datasource is now available inside a Gis client.
+
+### Benefits - Expert interview
+
+John Maaskant from IHW has participated in the interview and we asked him the questions from the interview design:
+- Question #1: Does the addition of the OGC API Features implementation provide any benefit for collaboration in your industry?
+- Question #2: Is it feasible to add an OGC implementation to the supported standards? This question must be approached from multiple perspectives (economical, social, organizational, cultural, etc)
+- Question #3 (if applicable): Why is it not feasible?
+
+
+His response was as follows:
+> The addition of the new OGC API standards can deliver a lot of value for the water sector. It allows GIS software to connect to datasources in water sector. This will vastly open up the industry to all sorts of innovation. This innovation can come from the functionality of existing GIS software as well as new software that is OGC compliant. Also, the addition of an OGC API implementation can suppress or prevent vendor lock-in positions.
+>
+> In order for this to work though, the OGC API Features is not sufficient. An OGC API standard for timeseries is also required, given that the data is about time based measurements.
+>
+> Economically, an implementation must be done in a way that minimal investment is required. There are initiatives that allow us to expose the DD-API easily using very little investment in software. IHW uses a FAIR connector for connectivity with and between the industry. This allows to change only one system in order to enable the OGC API for the entire industry. This path, or a comparable one, must be taken, otherwise many software systems must be adapted, which is costly.
+>
+> Socially and organizationally, it takes time to implement the OGC API specifications alongside the DD-API, given that many organizations have done extensive investments into the DD-API and may view the OGC API as a competitor instead of an addition.
+>
+> Culturally, we would to stress that the governmental culture in the Netherlands is decentralized (or federated). Although IHW is the (legally) formal owner of the specifications, it cannot dictate changes to the participants in the industry. Compliance and cooperation must be achieved through extensive collaboration (so called 'polderen'). As such, implementation must be done at a small scale and then be expanded. Use updates and development of new systems as opportunities to implement the OGC standard.
+
 
 ### Cost
 
-TODO
+#### Code size & cost estimate
 
-### Reception of library
+| Measurement                   | CLOC size |
+| --                            | --   |
+| Original Goaf project         | 2570 |
+| Goaf without implementation   | 1370 |
+| Code required to run library  |  191 |
+| Library                       | 1631 |
 
-TODO
+From the measurements, we can conclude the codesize of the implementation from scratch to be the difference between the original Goaf project and the Goaf project without the implementation: 2570 - 1370 = 1200. The 'Goaf without implementation' was taken approximately; it was too cumbersome to completely remove all code references and refactorings for a Goaf implementation without any traces of internal serving the specifications.
+
+This leads to the following cost estimates. Keep in mind that all the implementations are given with maintenance:
+
+| Component                   | Development cost | Total cost      |
+| --                          | --               | --              |
+| Library                     |  12.000 - 27.000 | 30.000 - 68.000 |
+| Implementation from scratch |   9.000 - 20.000 | 22.000 - 50.000 |
+| Using library               |    1.400 - 3.200 |  3.500 - 8.000  |
+
+As a note, if a library is used by multiple parties, the cost of maintenance can be split by these parties. This means that multiple people contribute to the library.
 
 ## Conclusion
 This leads to the following conclusions:
-- Implementing the library is quite straightforward and can be done with minimal cost.
+- Implementing the library is quite straightforward and can be done with minimal cost. It is an affordable and easy to use option for many developers.
+- There is high value in offering OGC API implementations besides a convenience API. In the use case we have interviewed, the availability of a time series API is mandatory in order for the OGC API implementation to be useful. However, with a time series API, the value is considered very high.
+- OGC API Features is already supported by major Gis clients (such as QGis). Any server that offers OGC API Features can therefore offer the functionality of such tools to their clients immediately.
 - Building an OGC API Features implementation from scratch is relatively expensive and requires in depth knowledge of the specifications.
+- Because of the low cost of implementing the library, the OGC API Features is easily adopted as an additional API system.
+- OGC Teamengine is not a very user friendly system. This hinders compliancy and raises the bar for adaptation.
