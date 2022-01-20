@@ -3,13 +3,13 @@
 This document contains the main report for topic #4. It also contains the list of deliverables and links to the various repositories.
 
 This topic is researched using the following projects:
-- Goaf. Goaf is a Golang implementation of the OGC API Features API. This project can be found at https://github.com/PDOK/goaf
+- Goaf. Goaf is a Golang implementation of the OGC API Features - Part 1 Core. This project can be found at https://github.com/PDOK/goaf
 - go-ogc-api. Go-ogc-api is the Golang library that contains an implementation of the OGC API Features. It allows developers to easily build an OGC API Features enabled application. This project can be found at https://github.com/purple-polar-bear/go-ogc-api
 
 ### Summary
 This topic is concerned with a comparison between a convenience API and the OGC Features API. The report takes an existing (convenience) API and investigates the costs and benefits of adding the OGC Features API to it.
 
-The main conclusion of this report is that there are use cases where adding an OGC API implementation to an existing convenience API can provide great benefit. Important to realize is that the cost of adding an OGC API implementation is relatively low, if a library responsible for serving the API is already present. Without a library, the cost of implementing the OGC API specifications can be (too) high.
+The main conclusion of this report is that there are use cases where adding an OGC API implementation to an existing convenience API can provide great benefit. Important to realize is that the cost of adding an OGC API implementation is relatively low, if a library responsible for serving the API is already present. Without a library, the cost of implementing the OGC API specifications can be (too) high with respect to it's usefulness.
 
 ## Research question
 This chapter will expand upon the research question. It will scope the research topic and it will outline the general approach. The subsequent chapters will cover the following:
@@ -30,16 +30,18 @@ In theory, it is almost always technically feasible to support multiple API form
 This research is limited by the following constraints:
 - We will only approach the research question by taking an application with an existing (convenience) API and investigate the cost and benefit of adding an OGC API Features implementation. We acknowledge that the question can also be approached the other way (take an existing OGC API Features implementation and add a convenience API). We also acknowledge this approach as interesting. However, due to resource (time) limitations, we have chosen to only investigate the first approach.
 - We make the comparison by looking at a system that contains location data, but also  measurement data. The topic is about the OGC API Features, not about OGC measurement APIs. Therefore, we will only use the location data for this topic.
-- We will demonstrate the added functionality that becomes available when data is accessible using OGC API Features with only one client application (QGis). We implicitly generalize this to the functionality of other OGC compliant client applications.
+- We will demonstrate the added functionality that becomes available when data is accessible using OGC API Features with only one client application (QGIS). We implicitly generalize this to the functionality of other OGC compliant client applications.
 
 ### Approach
 The approach to this topic is to delve into the OGC API Features and to investigate the investment and possible return of adding an OGC API Features compliant endpoint to an existing service.
 
-To do this, we will start with an existing convenience API. This is done by taking the API from an existing open system by a Dutch organisation called 'Kadaster' that contains location data. We will investigate the full potential with a datasource containing water quality an quantity measurements for the Dutch water authorities (Rijkswaterstaat en waterschappen). For the latter, we will only take a look at the location part of their API.
+To do this, we will start with an existing OGC API implementation. This is done by taking the API from an existing open system by a Dutch organisation called 'Kadaster' that contains location data.
 
-Usefulness will be determined by investigating the benefits. The benefits will be determined in two ways. First, we will look into the functionality that is available if data is accessible via the OGC API Features. The convenience API is very particular and will not be understood by generic software. Practically, we will examine the data using the QGis viewer, since this viewer cannot access the data via the convenience API, but it can access the data via the OGC API Features implementation.
+We will investigate the full potential with a datasource containing water quality an quantity measurements for the Dutch water authorities (Rijkswaterstaat en waterschappen). For the latter, we will only take a look at the location part of their API.
 
-By demonstrating this usage, it means that adding the OGC API Features implementation unlocks the functionality of the QGis viewer. Implicitly, this means that the functionality of any OGC compliant client application (or web application) becomes available if this implementation is added.
+Usefulness will be determined by investigating the benefits. The benefits will be determined in two ways. First, we will look into the functionality that is available if data is accessible via the OGC API Features. The convenience API is very particular and will not be understood by generic software. Practically, we will examine the data using the QGIS viewer, since this viewer cannot access the data via the convenience API, but it can access the data via the OGC API Features implementation.
+
+By demonstrating this usage, it means that adding the OGC API Features implementation unlocks the functionality of the QGIS viewer. Implicitly, this means that the functionality of any OGC compliant client application (or web application) becomes available if this implementation is added.
 
 Besides full blown applications, OGC API's can also be used easily in most popular general purpose languages. An example of such a language is Python, which is quite popular among data analysts. Python has easy to use libraries to access OGC  API's. Therefore, an additional functional benefit is easy development against the datasources.
 
@@ -57,8 +59,8 @@ In addition, we will also determine the cost of building a library. This is rele
 
 Given the complexity of the research topic, we will approach the questions using a variety of different methods. The results from these methods will be combined into a single set of conclusions. The overall method is therefore a case study.
 
-### Demonstration with QGis
-The first way to demonstrate benefit is by demonstrating the datasource being accessed by an OGC client, QGis. We will not demonstrate all the capabilities of OGC clients; there are ample examples available on the Internet.
+### Demonstration with QGIS
+The first way to demonstrate benefit is by demonstrating the datasource being accessed by an OGC compatible client, QGIS. We will not demonstrate all the capabilities of OGC clients; there are ample examples available on the Internet.
 
 ### Benefit of API - expert interview
 The main question of the API interview is: is there a benefit in enriching an existing convenience API with an OGC API Features implementation?
@@ -68,7 +70,7 @@ The interview question is clear. We want to test a specific hypotheses in a qual
 The interview will be conducted with Informatiehuis Water (IHW). They are responsible for standards in the water industry. The water industry has a convenience API known as Digitale Delta API. This makes IHW relevant and knowledgeable, and therefore a suitable candidate. We will interview John Maaskant, who is advisor on data and information management with IHW. He is also affiliated with the Dutch waterauthority (Rijkswaterstaat).
 
 We have identified the following questions:
-- Introduction. Explain the OGC standards (if required) and give a quick demo with the QGis client.
+- Introduction. Explain the OGC standards (if required) and give a quick demo with the QGIS client.
 - Question #1: Does the addition of the OGC API Features implementation provide any benefit for collaboration in your industry?
 - Question #2: Is it feasible to add an OGC implementation to the supported standards? This question must be approached from multiple perspectives (economical, social, organizational, cultural, etc)
 - Question #3 (if applicable): Why is it not feasible?
@@ -187,7 +189,7 @@ Before we dive into the benefits and the cost of an additional OGC API Features 
 
 #### Code review on library
 
-The design of the library as well as the implementation have been submitted to the project owners of Goaf (a team of Kadaster). They were asked to criticize the design. They find the implementation, at face value, sufficient for further exploration. They want to use this library for a different project. The have also stated that a conclusion cannot be drawn without actual using the code in a different project.
+The design of the library as well as the implementation have been submitted to the project owners of Goaf (a team of Kadaster). They were asked to criticize the design. They find the implementation, at face value, sufficient for further exploration. They want to explore the possibility of using this library for different other projects via a proof-of-concept. The have also stated that a conclusion cannot be drawn without actual using the code in a different project.
 
 #### Ease of expansion
 
@@ -203,7 +205,7 @@ When implementing the specifications in the library, the developers had the foll
 The developers had the following subjective observations:
 - Implementing the collections and features part is straightforward and can be done relatively easily.
 - Implementing the linking part of the library is tricky; the library must have knowledge about the paths at which it is served in order to create the links.
-- The HTML implementation is only relevant for services that are open to the public or that must serve the data in HTML format. If a non-open service is build that is only used by GIS clients (such as QGis), the HTML templates don't have any value.
+- The HTML implementation is only relevant for services that are open to the public or that must serve the data in HTML format. If a non-open service is build that is only used by GIS clients (such as QGIS), the HTML templates don't have any value.
 - The OpenAPI specification is a lot of work to implement. We also see little added value, given that GIS clients natively understand the API specification; they don't need the OpenAPI part to understand the API itself.
 
 #### Subjective comparison with WFS2 standard
@@ -221,9 +223,9 @@ The library was rated against the OGC Teamengine testsuite. We encountered the f
 - This led working with Teamengine to be cumbersome and frustrating. This can be seen as a problem, as it hinders adaptability.
 - There are many references to OGC API libraries. Currently, the go-ogc-api is not present on any of the lists. Adding these references will increase visibility of the library, thus improving adaptability.
 
-### Benefits - QGis viewer
+### Benefits - QGIS viewer
 
-Below is an image of QGis with the datasource loaded as OGC API Feature set using the library:
+Below is an image of QGIS with the datasource loaded as OGC API Feature set using the library:
 
 ![](qgis.png)
 
@@ -276,7 +278,7 @@ As a note, if a library is used by multiple parties, the cost of maintenance can
 This leads to the following conclusions:
 - Implementing the library is quite straightforward and can be done with minimal cost. It is an affordable and easy to use option for many developers.
 - There is high value in offering OGC API implementations besides a convenience API. In the use case we have interviewed, the availability of a time series API is mandatory in order for the OGC API implementation to be useful. However, with a time series API, the value is considered very high.
-- OGC API Features is already supported by major Gis clients (such as QGis). Any server that offers OGC API Features can therefore offer the functionality of such tools to their clients immediately.
+- OGC API Features is already supported by major Gis clients (such as QGIS). Any server that offers OGC API Features can therefore offer the functionality of such tools to their clients immediately.
 - Building an OGC API Features implementation from scratch is relatively expensive and requires in depth knowledge of the specifications.
 - Because of the low cost of implementing the library, the OGC API Features is easily adopted as an additional API system.
 - OGC Teamengine is not a very user friendly system. This hinders compliancy and raises the bar for adaptation.
