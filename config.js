@@ -42,8 +42,8 @@ var respecConfig =
   specType: "HR",
   pubDomain: "api",
   //publishDate: "2022-01-13",
-  previousPublishDate: "2022-01-13",
-  previousMaturity: "GN-CV",
+  //previousPublishDate: "2022-01-13",
+  //previousMaturity: "GN-CV",
   editors:
   [
     {
@@ -75,7 +75,7 @@ var respecConfig =
       companyURL: "http://https://www.purplepolarbear.nl/",
     },
     {
-      name: "Bill Robberts",
+      name: "Bill Roberts",
       company: "Swirrl",
       companyURL: "https://www.swirrl.com/",
     },
