@@ -10,11 +10,11 @@ Geonovum's efforts - with regards to promoting the use of APIs – is well align
 
 The Spatial Data on the Web working group is dedicated (among other things) to do the following: 
 
-* to determine how spatial data can best be integrated with other data on the Web; 
+* to determine how spatial data can best be integrated with other data on the Web
 
-* to determine how machines and people can discover that different facts in different datasets relate to the same place, especially when 'place' is expressed in different ways and at different levels of granularity; 
+* to determine how machines and people can discover that different facts in different datasets relate to the same place, especially when 'place' is expressed in different ways and at different levels of granularity 
 
-* to identify and assess existing methods and tools and then create a set of best practices for their use [W3C, OGC 2015]. 
+* to identify and assess existing methods and tools and then create a set of best practices for their use
 
  
 
