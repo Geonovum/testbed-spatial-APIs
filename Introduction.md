@@ -1,4 +1,4 @@
-# Background
+## Background
 
 Geonovum wants geospatial data to be used. The public sector creates a lot of geospatial data, a lot of which is open data and could be useful to others, who are often not experts on spatial data. In addition, we have observed how geospatial data is becoming more and more important for the web and its importance is still growing. Semantically meaningful information on objects is required. Which is not just buildings, roads or waterways; but also e.g. legislative boundaries, permits and ordinances. In our opinion it’s very important to integrate spatial data with other data on the Web. This is one of the reasons why Geonovum originally started the Platform Linked Data Nederland as a pilot a few years ago, why we organized the Spatial data on the Web testbed in 2015/2016, and it is also part of the mission of the Spatial Data on the Web working group (SDWWG) that OGC and W3C have formed together, in which Geonovum is participating. Geonovum is also actively promoting the use of APIs within the public sector organizing and participating in the API knowledge platform (apigov.nl).  
 
@@ -26,7 +26,7 @@ One of the users of geospatial data is the public sector itself. In the Netherla
 
  
 
-# Goal of the testbed 
+## Goal of the testbed 
 
 In the years since Geonovum’s previous Spatial data on the Web testbed, major innovations have been taking place in geospatial data dissemination and -standards. Notably, the OGC Web Service standards have been evolving into a set of standardized OGC Web APIs. These could play a key role in making spatial data part of the ecosystem of the Web. We are keen to implement and adopt these new standards in the Netherlands, but before we do so, we need to answer several questions about them. 
 
